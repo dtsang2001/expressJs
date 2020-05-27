@@ -1,0 +1,37 @@
+
+extends ../layouts/master
+
+block title
+    title Add User
+
+block content
+    h1 Add User
+
+    if errors
+        each error in errors
+            .alert.alert-danger #{error}
+    
+    form(action="/user/create" method="POST")
+        .form-group.row
+            label.col-sm-2.col-form-label Name
+            .col-sm-10
+                input.form-control(type='text', name='name', placeholder='Name')
+        .form-group.row
+            label.col-sm-2.col-form-label Age
+            .col-sm-10
+                input.form-control(type='text', name='age', placeholder='Age')
+        .form-group.row
+            label.col-sm-2.col-form-label Address
+            .col-sm-10
+                input.form-control(type='text', name='address', placeholder='Address')
+        .form-group.row
+            label.col-sm-2.col-form-label Email
+            .col-sm-10
+                input.form-control(type='text', name='email', placeholder='Email')
+        .form-group.row
+            label.col-sm-2.col-form-label Phone
+            .col-sm-10
+                input.form-control(type='text', name='phone', placeholder='Phone')
+
+        button.btn.btn-primary.mb-2.float-right(type='submit') Create user
+

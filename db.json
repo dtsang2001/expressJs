@@ -1,0 +1,20 @@
+{
+  "user": [
+    {
+      "name": "Sang",
+      "age": "19",
+      "address": "Nghe An",
+      "email": "sang@gmail.com",
+      "phone": "0987754421",
+      "id": "StjqvVxHq"
+    },
+    {
+      "name": "Hung",
+      "age": "24",
+      "address": "Ha Noi",
+      "email": "hungnt@gmail.com",
+      "phone": "0977655321",
+      "id": "lG_fpZS_R"
+    }
+  ]
+}
