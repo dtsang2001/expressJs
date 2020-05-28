@@ -42,7 +42,6 @@ module.exports.createUser = function(req, res, next){
             errors : errors,
             dataOld : req.body
         });
-    }else{
-        next();
     }
+    next();
 }

@@ -34,15 +34,14 @@ module.exports.search = function(req, res){
 }
 
 module.exports.add = function(req, res){
-    res.render('users/add', {
-
-    })
+    res.render('users/add')
 }
 
 module.exports.create = function(req, res){
     // req.body.id = db.get('user').value().length + 1;
 
     req.body.id = shortid.generate();
+    req.body.avatar = req.file.path.split('/').slice(1).join('/');
 
     db.get('user')
         .push(req.body)
@@ -54,7 +53,7 @@ module.exports.create = function(req, res){
 module.exports.view = function(req, res){
     var id = req.params.id;
 
-    var userDetail = db.get('user').find({ id: id }).value()
+    var userDetail = db.get('user').find({ id: id }).value();
 
     res.render('users/detail', {
         user : userDetail

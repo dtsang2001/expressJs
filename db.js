@@ -5,7 +5,7 @@ const adapter = new FileSync('db.json')
 const db = low(adapter)
 
 // JSON mac dinh
-db.defaults({ user: [] })
+db.defaults({ user: [], session: [] })
   .write()
 
 module.exports = db;

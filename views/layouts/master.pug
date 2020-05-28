@@ -8,8 +8,6 @@ html(lang='en')
     body
         nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
             a.navbar-brand(href='/') DTSang
-            button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
-                span.navbar-toggler-icon
 
             #navbarSupportedContent.collapse.navbar-collapse
                 ul.navbar-nav.mr-auto
@@ -17,6 +15,24 @@ html(lang='en')
                         a.nav-link(href='/') Home
                     li.nav-item
                         a.nav-link(href='/user') User
+                    li.nav-item
+                        a.nav-link(href='/product') Product
+                    li.nav-item
+                        a.nav-link(href='/cart') Cart(0)
+
+                if author
+                    ul.navbar-nav.my-2.my-lg-0
+                        li.nav-item.active
+                            a.nav-link(href='/auth/login') #{author.name}
+                        li.nav-item
+                            a.nav-link(href='#') Logout
+                else
+                    ul.navbar-nav.my-2.my-lg-0
+                        li.nav-item.active
+                            a.nav-link(href='/auth/login') Login
+                        li.nav-item
+                            a.nav-link(href='#') Register
+
 
 
         .container
