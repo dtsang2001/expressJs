@@ -1,7 +1,13 @@
 const db = require('../db');
 
+module.exports.view = (req, res) => {
+    res.render('auth/view');
+}
+
 module.exports.login = function(req, res){
-    res.render('auth/login');
+    res.render('auth/login', {
+        csrfToken: req.csrfToken()
+    });
 }
 
 module.exports.loginPost = function(req, res){
@@ -28,4 +34,9 @@ module.exports.loginPost = function(req, res){
     res.cookie('authorId', auth.id, {signed: true});
 
     res.redirect('/user');
+}
+
+module.exports.logout = (req, res) => {
+    res.clearCookie('authorId', {signed: true});
+    res.redirect('back');
 }

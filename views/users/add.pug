@@ -12,6 +12,7 @@ block content
             .alert.alert-danger #{error}
     
     form(action="/user/create", method="POST", enctype="multipart/form-data")
+        input(type="hidden", name="_csrf", value= csrfToken)
         .form-group.row
             label.col-sm-2.col-form-label Name
             .col-sm-10

@@ -8,8 +8,8 @@ block content
     h1 List User 
         a.btn.btn-success.f-right(href="/user/create") Add new
 
-    form.form-inline.ml-auto(action="/user/search" method="GET")
-        input.form-control.mr-sm-2(type='search', name="name", placeholder='Search', aria-label='Search', value= query)
+    form.form-inline.ml-auto(action="/user" method="GET")
+        input.form-control.mr-sm-2(type='search', name="search", placeholder='Search', aria-label='Search', value= query)
         button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
 
     table.table

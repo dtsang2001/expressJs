@@ -1,3 +1,4 @@
+
 const shortid = require('shortid');
 
 const db = require('../db');
@@ -5,16 +6,16 @@ const db = require('../db');
 module.exports = function(req, res, next){
 
     if (!req.signedCookies.sessionId) {
-        
-        res.cookie('sessionId', shortid.generate(), {
-            signed: true
-        });
 
         const sessionId = shortid.generate();
 
-        db.get('session').push({id: sessionId}).write();
+        res.cookie('sessionId', sessionId , {
+            signed: true
+        });
 
-        console.log(sessionId);
+        console.log(sessionId) // null
+
+        db.get('session').push({id: sessionId}).write();
     }
 
     next();

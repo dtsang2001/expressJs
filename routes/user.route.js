@@ -1,14 +1,12 @@
 const express = require('express');
-var multer  = require('multer')
+const multer  = require('multer')
 
 const router = express.Router();
 const userController = require('../controllers/user.controller');
 const userValidate = require('../middleware/validate.middleware');
-var upload = multer({ dest: './public/uploads/' })
+const upload = multer({ dest: './public/uploads/' })
 
 router.get('/', userController.list);
-
-router.get('/search', userController.search);
 
 router.get('/create', userController.add);
 

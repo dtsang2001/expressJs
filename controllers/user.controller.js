@@ -3,21 +3,14 @@ const db = require('../db');
 
 module.exports.list = function(req, res){
 
-    res.render('users/view', {
-        users : db.get('user').value()
-    });
-}
+    var q = req.query.search || '';
 
-module.exports.search = function(req, res){
-
-    var q = req.query.name;
-    
-    var searchUsers = db.get('user').value().filter(function(user){
+    var users = db.get('user').value().filter( (user) => {
         return user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
     })
 
     function searchEmpty(){
-        if (searchUsers.length) {
+        if (users.length) {
             return false;
         }else{
             return true;
@@ -27,14 +20,16 @@ module.exports.search = function(req, res){
     var empty = searchEmpty();
 
     res.render('users/view', {
-        users : searchUsers,
+        users : users,
         query : q,
         empty : empty
-    })
+    });
 }
 
 module.exports.add = function(req, res){
-    res.render('users/add')
+    res.render('users/add', { 
+        csrfToken: req.csrfToken() 
+    })
 }
 
 module.exports.create = function(req, res){

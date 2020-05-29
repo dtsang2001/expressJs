@@ -18,14 +18,15 @@ html(lang='en')
                     li.nav-item
                         a.nav-link(href='/product') Product
                     li.nav-item
-                        a.nav-link(href='/cart') Cart(0)
+                        a.nav-link(href='/cart') Cart 
+                            span (#{cart.totalQuantity})
 
                 if author
                     ul.navbar-nav.my-2.my-lg-0
                         li.nav-item.active
-                            a.nav-link(href='/auth/login') #{author.name}
+                            a.nav-link(href='/auth') #{author.name}
                         li.nav-item
-                            a.nav-link(href='#') Logout
+                            a.nav-link(href='/auth/logout') Logout
                 else
                     ul.navbar-nav.my-2.my-lg-0
                         li.nav-item.active
