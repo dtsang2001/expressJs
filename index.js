@@ -5,9 +5,10 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const csurf = require('csurf');
 const bodyParse = require('body-parser');
+const multer = require('multer');
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.MONGO_URL);
+mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const routeUser = require('./routes/user.route');
 const routeAuth = require('./routes/auth.route');
@@ -22,20 +23,22 @@ const port = 3000;
 
 const app = express();
 
-app.set('view engine', 'pug');
+app.set('view engine', 'ejs');
 app.set('views', './views');
 
 app.use(bodyParse.json());
 app.use(bodyParse.urlencoded({extended : true}))
 app.use(cookieParser(process.env.SESSION_SECRET));
-app.use(csurf({ cookie: true}));
-app.use(sessionMiddleware);
-app.use(authMiddleware.Auth);
+// const upload = multer({ dest: './public/uploads/'})
+// app.use(multer({ dest: './public/uploads/'}).single('avatar'));
+// app.use(csurf({ cookie: true}));
+app.use(sessionMiddleware); 
 app.use(globalMiddleware.Cart);
+app.use(globalMiddleware.Auth);
 
 app.use(express.static('public'));
 
-app.get('/', authMiddleware.Auth, function(req, res){
+app.get('/', function(req, res){
     res.render('index');
 })
 

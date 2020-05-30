@@ -1,11 +1,11 @@
 var Product = require('../models/product.model');
 
-module.exports.list = function(req, res, next){
+module.exports.list = async (req, res, next) => {
 
-    Product.find().then(function(products){
-        res.render('products/list', {
-            products : products
-        })
+    var products = await Product.find();
+    
+    res.render('products/list', {
+        products: products,
     });
 
     // var perPage = 8;

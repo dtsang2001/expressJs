@@ -1,17 +1,20 @@
 const express = require('express');
-const multer  = require('multer')
+const multer  = require('multer');
+const csurf = require('csurf');
 
 const router = express.Router();
-const userController = require('../controllers/user.controller');
-const userValidate = require('../middleware/validate.middleware');
-const upload = multer({ dest: './public/uploads/' })
+const controller = require('../controllers/user.controller');
+const validate = require('../middleware/validate.middleware');
 
-router.get('/', userController.list);
+const upload = multer({ dest: './public/uploads/'});
+var csrfProtection = csurf({ cookie: true });
 
-router.get('/create', userController.add);
+router.get('/', controller.list);
 
-router.post('/create', upload.single('avatar'), userValidate.createUser, userController.create);
+router.get('/create', csrfProtection, controller.add);
 
-router.get('/detail/:id', userController.view);
+router.post('/create', upload.single('avatar'), validate.createUser, controller.create);
+
+router.get('/detail/:id', controller.view);
 
 module.exports = router;

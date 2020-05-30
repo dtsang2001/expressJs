@@ -1,11 +1,15 @@
 const shortid = require('shortid');
+// const csurf = require('csurf')
 const db = require('../db');
+const User = require('../models/user.model');
 
-module.exports.list = function(req, res){
+module.exports.list = async (req, res) => {
+
+    var user = await User.find();
 
     var q = req.query.search || '';
 
-    var users = db.get('user').value().filter( (user) => {
+    var users = user.filter( (user) => {
         return user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
     })
 
@@ -27,30 +31,31 @@ module.exports.list = function(req, res){
 }
 
 module.exports.add = function(req, res){
-    res.render('users/add', { 
-        csrfToken: req.csrfToken() 
-    })
+    res.render('users/add', { csrfToken: req.csrfToken() })
 }
 
 module.exports.create = function(req, res){
-    // req.body.id = db.get('user').value().length + 1;
 
-    req.body.id = shortid.generate();
     req.body.avatar = req.file.path.split('/').slice(1).join('/');
 
-    db.get('user')
-        .push(req.body)
-        .write()
+    var data = [
+        {
+            name: req.body.name,
+        }
+    ]
 
-    res.redirect('/user')
+    console.log(req.body);
+    
+    // res.redirect('/user')
+    res.json(req.body);
 }
 
-module.exports.view = function(req, res){
+module.exports.view = async (req, res) => {
     var id = req.params.id;
 
-    var userDetail = db.get('user').find({ id: id }).value();
+    var user = await User.findOne({ _id: id });
 
     res.render('users/detail', {
-        user : userDetail
+        user : user
     })
 }

@@ -5,9 +5,7 @@ module.exports.view = (req, res) => {
 }
 
 module.exports.login = function(req, res){
-    res.render('auth/login', {
-        csrfToken: req.csrfToken()
-    });
+    res.render('auth/login');
 }
 
 module.exports.loginPost = function(req, res){

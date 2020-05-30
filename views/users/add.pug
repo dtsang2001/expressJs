@@ -11,8 +11,8 @@ block content
         each error in errors
             .alert.alert-danger #{error}
     
-    form(action="/user/create", method="POST", enctype="multipart/form-data")
-        input(type="hidden", name="_csrf", value= csrfToken)
+    form(action="/user/create", enctype="multipart/form-data", method="POST")
+        input(type="hidden", name="_csrf",id="_csrf", value=csrfToken)
         .form-group.row
             label.col-sm-2.col-form-label Name
             .col-sm-10
@@ -37,6 +37,6 @@ block content
             label.col-sm-2.col-form-label Avatar
             .col-sm-10
                 input.form-control-file(type='file', name='avatar')
-
+        
         button.btn.btn-primary.mb-2.float-right(type='submit') Create user
 

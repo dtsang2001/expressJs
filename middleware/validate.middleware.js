@@ -28,12 +28,25 @@ module.exports.createUser = function(req, res, next){
 
     if (!req.body.phone) {
         errors.push('Phone is require');
+    }else{
         if (typeof parseInt(req.body.phone) !== "number") {
             errors.push("Wrong age format");
-        }else{
-            if (req.body.phone.length > 11 && req.body.phone.length < 9) {
-                errors.push("Phone numbers must be greater than 9 and smaller than 11");
-            }
+        }
+    }
+
+    if (!req.body.phone) {
+        errors.push('Phone is require');
+    }else{
+        if (typeof parseInt(req.body.phone) !== "number") {
+            errors.push("Wrong age format");
+        }
+    }
+
+    if (!req.file) {
+        errors.push('Image is require');
+    }else{
+        if (req.file.mimetype.split('/').slice(0, 1).join('') !== "image") {
+            errors.push('Wrong image format');
         }
     }
 
