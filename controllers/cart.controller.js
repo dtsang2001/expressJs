@@ -1,25 +1,36 @@
 
-const db = require('../db');
+const Product = require('../models/product.model');
+const Cart = require('../models/cart.model');
 
-module.exports.view = function(req, res){
-    res.render('cart/view')
+module.exports.view = (req, res) => {
+
+    var cart = new Cart( (req.session.cart) ? req.session.cart : {});
+
+    res.render('cart/view', {
+        cart : cart.items,
+        totalQuantity : cart.totalQuantity,
+        totalPrice : cart.totalPrice
+    });
 }
 
-module.exports.add = function(req, res){
-    var productId = req.params.id;
-    var sessionId = req.signedCookies.sessionId;
-    
-    if (!sessionId) {
-        res.redirect('/product');
-        return;
+module.exports.add = async (req, res) => {
+    try {
+
+        var quantity = (req.body.quantity) ? req.body.quantity : 1;
+
+        var productId = req.params.id;
+        var product = await Product.findOne({_id : productId});
+
+        var cart = new Cart( (req.session.cart) ? req.session.cart : {});
+
+        cart.add(product, productId, quantity);
+
+        req.session.cart = cart;
+
+        res.redirect('product');
+        
+    } catch (error) {
+        console.log('-------' + error);
     }
-
-    var count = db.get('session').find({ id : sessionId }).get('cart.' + productId, 0).value();
-    var totalQuantity = db.get('session').find({ id : sessionId }).get('totalQuantity', 0).value();
-    
-    db.get('session').find({ id : sessionId }).set('cart.' + productId, count + 1).write();
-    db.get('session').find({ id : sessionId }).set('totalQuantity', totalQuantity + 1).write();
-
-    res.redirect('/product');
 
 };

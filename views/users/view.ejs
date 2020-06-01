@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <%- include ("../layouts/head") %>
+        <title>Home</title>
+    </head>
+
+    <body>
+
+        <header>
+            <%- include ("../layouts/header") %>
+        </header>
+
+        <section>
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1 class="display-4 text-center"> Profile : <%= locals.user.name%></h1>
+
+                    <div class="card bg-dark text-white">
+                        <img class="card-img" src="../../<%= locals.user.avatar%>" style="height: 400px; object-fit: cover;" alt="Card image">
+                    </div>
+
+                    <ul class="list-group" style="text-align: center;">
+                        <li class="list-group-item">Email : <%= locals.user.email%></li>
+                        <li class="list-group-item">Phone : <%= locals.user.phone%></li>
+                        <li class="list-group-item">Address : <%= locals.user.address%></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <%- include ("../layouts/footed") %>
+        </footer>
+
+    </body>
+
+</html>

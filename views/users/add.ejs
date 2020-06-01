@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <%- include ("../layouts/head") %>
+        <title>Home</title>
+    </head>
+
+    <body>
+
+        <header>
+            <%- include ("../layouts/header") %>
+        </header>
+
+        <section>
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1 class="display-4 text-center">Add User </h1>
+
+                    <% if(locals.errors){%>
+                        <% errors.forEach(function(error) {%>
+                            <div class="alert alert-danger">
+                                <%= error %>
+                            </div>
+                        <% }) %>
+                    <% } %>
+
+                    <form action="" enctype="multipart/form-data" method="POST">
+                        <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken%>">
+                        <div class="form-group">
+                          <label for="">Avatar</label>
+                          <input type="file" class="form-control-file" name="avatar" placeholder="Avatar">
+                        </div>
+                        <div class="form-group">
+                          <label for="">Name</label>
+                          <input type="text" class="form-control" name="name" placeholder="Enter Name" value="<%= (locals.dataOld) ? dataOld.name : '' %>">
+                        </div>
+                        <div class="form-group">
+                          <label for="">Age</label>
+                          <input type="number" class="form-control" name="age" placeholder="Enter Age" value="<%= (locals.dataOld) ? dataOld.age : '' %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Address</label>
+                            <input type="text" class="form-control" name="address" placeholder="Enter Address" value="<%= (locals.dataOld) ? dataOld.address : '' %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Email</label>
+                            <input type="email" class="form-control" name="email" placeholder="Enter Email" value="<%= (locals.dataOld) ? dataOld.email : '' %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Phone</label>
+                            <input type="text" class="form-control" name="phone" placeholder="Enter Phone" value="<%= (locals.dataOld) ? dataOld.phone : '' %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Password</label>
+                            <input type="password" class="form-control" name="password" placeholder="Password">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <%- include ("../layouts/footed") %>
+        </footer>
+
+    </body>
+
+</html>

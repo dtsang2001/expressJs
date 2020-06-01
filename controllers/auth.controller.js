@@ -1,4 +1,4 @@
-const db = require('../db');
+const User = require('../models/user.model')
 
 module.exports.view = (req, res) => {
     res.render('auth/view');
@@ -8,10 +8,10 @@ module.exports.login = function(req, res){
     res.render('auth/login');
 }
 
-module.exports.loginPost = function(req, res){
+module.exports.loginPost = async (req, res) => {
     // res.send(req.body);
     var email = req.body.email;
-    const auth = db.get('user').find({ email: email }).value();
+    const auth = await User.findOne({ email: email });
 
     if (!auth) {
         res.render('auth/login', {

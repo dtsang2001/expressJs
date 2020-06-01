@@ -21,7 +21,7 @@
 
     
         <ul class="navbar-nav mr-2 my-lg-0" style="float: right;">
-            <% if (author){ %>
+            <% if (locals.author){ %>
                 <li class="nav-item">
                     <a class="nav-link" href="/auth"><%- author.name %></a>
                 </li>
@@ -36,7 +36,7 @@
                     <a class="nav-link" href="/">Regiter</a>
                 </li>
             <% } %>
-        </ul>
+        </ul>   
         
     </div>
 </nav>

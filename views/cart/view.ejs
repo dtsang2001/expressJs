@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <%- include ("../layouts/head") %>
+        <title>Home</title>
+    </head>
+
+    <body>
+
+        <header>
+            <%- include ("../layouts/header") %>
+        </header>
+
+        <section>
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1 class="display-4 text-center">Your Cart (<%= totalQuantity %>)</h1>
+
+                    <% if(cart.length > 0) {%>
+                    <table class="table">
+
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Image</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Subtotal</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <% cart.forEach(function(item) {%>
+                                <tr>
+                                    <td><%= item.name %></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                    <% }%>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <%- include ("../layouts/footed") %>
+        </footer>
+
+    </body>
+
+</html>

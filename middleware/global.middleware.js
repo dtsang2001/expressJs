@@ -1,24 +1,9 @@
 
-const db = require('../db');
+const User = require('../models/user.model');
 
-module.exports.Cart = (req, res, next) => {
-
-    if(req.signedCookies.sessionId){
-        const cart = db.get('session').find({ id : req.signedCookies.sessionId }).value();
-        res.locals.cart = cart;
-    }
-
-    next();
-}
-
-module.exports.csrf = (req, res, next) => {
-    res.locals._csrfToken = req.csrfToken(),
-    next();
-}
-
-module.exports.Auth = (req, res, next) => {
+module.exports.Auth = async (req, res, next) => {
     if (req.signedCookies.authorId) {
-        const author = db.get('user').find({id : req.signedCookies.authorId}).value();
+        const author = await User.findOne({_id : req.signedCookies.authorId});
 
         res.locals.author = author;
     }

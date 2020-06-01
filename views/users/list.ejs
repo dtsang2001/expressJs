@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <%- include ("../layouts/head") %>
+        <title>Home</title>
+    </head>
+
+    <body>
+
+        <header>
+            <%- include ("../layouts/header") %>
+        </header>
+
+        <section>
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1 class="display-4 text-center">List User </h1>
+
+                    <a href="user/create" class="btn btn-primary text-white">Add User</a>
+
+                    <form action="/user" method="GET" class="form-inline my-2 my-lg-0" style="padding: 30px 0;">
+                        <input class="form-control mr-sm-2" style="width: 92%;" type="search" placeholder="Search" name="search" value="<%= (query) ? query : '' %>">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+
+                    <table class="table">
+
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Avatar</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <% users.forEach(function(user) {%>
+
+                                <tr>
+                                    <td style="width: 100px;">
+                                        <img src="<%= user.avatar %>" alt="" width="60px" style="border-radius: 50%; height: 60px; object-fit: cover;">
+                                    </td>
+                                    <td><%= user.name %></td>
+                                    <td><%= user.email %></td>
+                                    <td style="width: 300px;">
+                                        <a href="/user/view/<%= user.id %>" class="btn btn-success" role="button">View</a>
+                                        <a href="/user/edit/<%= user.id %>" class="btn btn-info" href="#" role="button">Edit</a>
+                                        <a href="/user/remove/<%= user.id %>" class="btn btn-danger" href="#" role="button" onclick="confirm('Do you want remove it?')">Delete</a>
+                                    </td>
+                                </tr>
+                             <% }) %>
+                          
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <%- include ("../layouts/footed") %>
+        </footer>
+
+    </body>
+
+</html>

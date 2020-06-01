@@ -2,10 +2,9 @@
 <html lang="en">
 
     <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        <%- include ("layouts/head") %>
         <title>Home</title>
-    </head> 
+    </head>
 
     <body>
 
@@ -16,7 +15,7 @@
         <section>
             <div class="jumbotron jumbotron-fluid">
                 <div class="container">
-                    <!-- <h1 class="display-3">Hello, <% if (author) {author.name} else {'...'} %></h1> -->
+                    <h1 class="display-3">Hello, <%= (locals.author) ? author.name : ''%> </h1>
                     <p class="lead">Jumbo helper text</p>
                     <hr class="my-2">
                     <p>More info</p>
